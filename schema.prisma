@@ -12,10 +12,11 @@ generator client {
 }
 
 model User {
-  id    String @id @default(cuid())
-  name  String @default("")
-  email String @unique @default("")
-  posts Post[] @relation("Post_author")
+  id       String @id @default(cuid())
+  name     String @default("")
+  email    String @unique @default("")
+  password String
+  posts    Post[] @relation("Post_author")
 }
 
 model Post {
@@ -25,6 +26,7 @@ model Post {
   authorId    String?   @map("author")
   publishedAt DateTime?
   status      String?   @default("draft")
+  content     String    @default("[{\"type\":\"paragraph\",\"children\":[{\"text\":\"\"}]}]")
 
   @@index([authorId])
 }
